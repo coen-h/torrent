@@ -9,7 +9,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +28,28 @@ body {
   border: none !important;
 }
 
+.gsc-refinementsArea {
+  display: none !important;
+  visibility: none !important;
+}
+
+.gsc-webResult-divider {
+  display: block !important;
+  height: 8px !important;
+}
+
+.gsc-result {
+  padding: 4px 8px 6px 8px !important;
+  border-radius: 4px !important;
+}
+
+.gsc-result-info {
+  color: #ffffff !important;
+}
+
+.gs-per-result-labels {
+  display: none !important;
+}
 
 .gsc-control-cse,
 .gsc-control-cse *,
