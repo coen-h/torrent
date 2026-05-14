@@ -51,6 +51,23 @@ body {
   display: none !important;
 }
 
+.gcsc-more-maybe-branding-root {
+  display: none !important;
+}
+
+.gsc-cursor-page {
+  padding: 4px 6px !important;
+  border-radius: 4px !important;
+}
+
+.gsc-above-wrapper-area {
+  display: none !important;
+}
+
+.gsc-search-box {
+  padding: 0px 0px 12px 0px !important;
+}
+
 .gsc-control-cse,
 .gsc-control-cse *,
 .gsc-input,
