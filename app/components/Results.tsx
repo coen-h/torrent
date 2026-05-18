@@ -5,25 +5,46 @@ import { useEffect, useState } from 'react';
 export default function Results() {
   const [results, setResults] = useState([]);
   const [totalResults, setTotalResults] = useState('');
+  const [totalPages, setTotalPages] = useState('');
 
   useEffect(() => {
-    const targetNode = document.body;
-    const config = { childList: true, subtree: true };
+    let timeoutId;
 
-    const callback = (mutationsList, observer) => {
-      const resultNodes = document.querySelectorAll('.gsc-webResult.gsc-result');
+    const handleHashChange = () => {
+      setResults([]);
+      setTotalResults('');
+      setTotalPages('');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+
+    const getVisibleResultNodes = () => {
+      const all = document.querySelectorAll('.gsc-webResult.gsc-result');
+      return Array.from(all).filter((node) => {
+        const rect = node.getBoundingClientRect();
+        if (rect.height === 0 || rect.width === 0) return false;
+        const style = window.getComputedStyle(node);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      });
+    };
+
+    const parseAndSet = () => {
+      const visibleNodes = getVisibleResultNodes();
       const resultInfoElement = document.querySelector('.gsc-result-info');
-    
+
       if (resultInfoElement) {
         const textContent = resultInfoElement.textContent;
+        setTotalResults((prev) => (prev === textContent ? prev : textContent));
 
-        setTotalResults((prev) => {
-          return prev === textContent ? prev : textContent;
-        });
+        const match = textContent.match(/[\d,]+/);
+        if (match) {
+          const resultCount = parseInt(match[0].replace(/,/g, ''), 10);
+          const calculatedPages = Math.ceil(resultCount / 10);
+          setTotalPages((prev) => (prev === calculatedPages ? prev : calculatedPages));
+        }
       }
-      
-      if (resultNodes.length > 0) {
-        const parsedResults = Array.from(resultNodes).map((node) => {
+
+      if (visibleNodes.length > 0) {
+        const parsedResults = visibleNodes.map((node) => {
           const titleElement = node.querySelector('.gs-title a');
           const snippetElement = node.querySelector('.gs-snippet');
           const imageElement = node.querySelector('.gs-image img');
@@ -35,37 +56,77 @@ export default function Results() {
             link: titleElement ? titleElement.href : '',
             snippet: snippetElement ? snippetElement.textContent : '',
             image: imageElement ? imageElement.src : '',
-            hasDirect: hasDirect ? true : false,
-            hasTorrent: hasTorrent ? true : false
+            hasDirect: !!hasDirect,
+            hasTorrent: !!hasTorrent,
           };
-        }).filter(res => res.title && res.link);
+        }).filter((res) => res.title && res.link);
 
         setResults((prev) => {
-          if (prev.length === parsedResults.length && prev[0]?.link === parsedResults[0]?.link) {
+          if (
+            prev.length === parsedResults.length &&
+            prev.length > 0 &&
+            prev[0].link === parsedResults[0].link
+          ) {
             return prev;
           }
           return parsedResults;
         });
+      } else {
+        setResults([]);
       }
     };
 
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    const callback = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(parseAndSet, 50);
+    };
 
-    return () => observer.disconnect(); 
+    const observer = new MutationObserver(callback);
+
+    const target = document.querySelector('.gsc-control-cse') || document.body;
+    observer.observe(target, { childList: true, subtree: true, attributes: true });
+
+    parseAndSet();
+
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+      window.removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
 
+  const handleNavigation = (pageNum) => {
+    const gsePaginationElements = document.querySelectorAll('.gsc-cursor-page');
+    let clicked = false;
+    
+    gsePaginationElements.forEach((el) => {
+      if (el.textContent === String(pageNum)) {
+        el.click();
+        clicked = true;
+      }
+    });
+
+    if (!clicked) {
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      params.set('gsc.page', pageNum);
+      window.location.hash = params.toString(); 
+    }
+  };
+
+  const maxPagesToShow = Math.min(Number(totalPages) || 0, 10);
+  const paginationArray = Array.from({ length: maxPagesToShow }, (_, i) => i + 1);
+
   return (
-    <div className="flex flex-col gap-2 w-full max-w-3xl mt-6">
+    <div className="flex flex-col gap-2 w-full max-w-3xl">
       {results.length > 0 ? (
         results.map((result, index) => (
-          <div  className="p-2 border flex gap-2 relative border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 shadow-sm">
+          <div key={index} className="p-2 border flex gap-2 relative border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 shadow-sm">
             <div>
               <a href={result.link} target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-emerald-100 hover:underline font-semibold text-lg line-clamp-1">{result.title}</a>
               <p className="text-sm text-mist-400 truncate">{result.link}</p>
               <p className="text-neutral-600 dark:text-neutral-300 mt-2 text-sm leading-relaxed">{result.snippet}</p>
             </div>
-            <img src={result.image} alt={result.title} className="w-44 object-cover rounded-md" />
+            <img src={result.image} alt={result.title} className="w-40 object-cover rounded-md" />
             <div className="absolute top-1 right-1 flex gap-1 z-10">
               {result.hasTorrent && (
                 <span className="bg-emerald-500/40 backdrop-blur text-emerald-50 border border-emerald-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">Torrent</span>
@@ -79,7 +140,16 @@ export default function Results() {
       ) : (
         <p className="text-neutral-500 text-sm text-center animate-pulse">Waiting for search results...</p>
       )}
-      <p className='text-center mt-6 mb-2'>{totalResults}</p>
+      
+      {paginationArray.length > 0 && (
+        <div className="flex justify-center items-center gap-2 mt-2">
+          {paginationArray.map((pageNum) => (
+            <button onClick={() => handleNavigation(pageNum)} key={pageNum} className="w-6 h-8 flex justify-center items-center text-sm font-medium rounded-md border border-neutral-800 text-neutral-400 bg-neutral-900 hover:bg-neutral-800 hover:text-neutral-100 transition-all">{pageNum}</button>
+          ))}
+        </div>
+      )}
+      
+      <p className='text-center my-2'>{totalResults}</p>
     </div>
   );
 }

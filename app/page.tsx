@@ -1,7 +1,6 @@
 "use client";
 
 import RefinementSelectors from './components/RefinementSelectors';
-import TypeLabels from './components/TypeLabels'; 
 import Results from './components/Results';
 import Script from 'next/script';
 
@@ -13,10 +12,11 @@ export default function SoftwareSearch() {
         <p className="text-neutral-500 dark:text-neutral-400 font-medium">The intelligent software discovery engine.</p>
       </div>
       
-      <TypeLabels />
 
       <RefinementSelectors />
 
+      <Results />
+      
       <Script
         src="https://cse.google.com/cse.js?cx=a1c68bdb263434c9b"
         strategy="afterInteractive"
@@ -27,7 +27,7 @@ export default function SoftwareSearch() {
         data-placeholder="Search for software..."
       ></div>
 
-      <Results />
+      
     </div>
   );
 }

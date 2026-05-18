@@ -42,8 +42,9 @@ export default function RefinementSelectors() {
 
     params.set('gsc.ref', refinement);
     params.set('gsc.tab', '0');
+    params.delete('gsc.page');
     
-    window.location.hash = decodeURIComponent(params.toString());
+    window.location.hash = params.toString();
   };
 
   const handleNavigation = (val) => {
@@ -54,16 +55,17 @@ export default function RefinementSelectors() {
 
     if (selected === val) {
       setSelected('');
-
       params.delete('gsc.ref');
       params.set('gsc.tab', '0');
+      params.delete('gsc.page');
     } else {
       setSelected(val);
-
       params.set('gsc.ref', refinement);
       params.set('gsc.tab', '0');
+      params.delete('gsc.page');
     }
-    window.location.hash = decodeURIComponent(params.toString());
+    
+    window.location.hash = params.toString();
   };
 
   return (
