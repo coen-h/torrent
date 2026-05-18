@@ -29,10 +29,10 @@ body {
   padding: 0px !important;
 }
 
-.gsc-expansionArea {
+/* .gsc-expansionArea {
   display: none !important;
   visibility: none !important;
-}
+} */
 
 .gsc-search-box * {
   color: #ffffff !important;
@@ -85,10 +85,6 @@ body {
 }
 
 .gs-per-result-labels {
-  display: none !important;
-}
-
-.gcsc-more-maybe-branding-root {
   display: none !important;
 }
 

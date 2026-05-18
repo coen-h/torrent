@@ -18,7 +18,7 @@ export default function SoftwareSearch() {
       <RefinementSelectors />
 
       <Script
-        src="https://cse.google.com/cse.js?cx=e05ec25e76bc046f5"
+        src="https://cse.google.com/cse.js?cx=a1c68bdb263434c9b"
         strategy="afterInteractive"
       />
 
