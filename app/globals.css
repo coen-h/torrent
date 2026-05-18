@@ -29,6 +29,11 @@ body {
   padding: 0px !important;
 }
 
+.gsc-expansionArea {
+  display: none !important;
+  visibility: none !important;
+}
+
 .gsc-search-box * {
   color: #ffffff !important;
 }
@@ -46,11 +51,6 @@ body {
 
 .gsc-completion-container * {
   color: #ffffff !important;
-}
-
-.gsc-refinementsArea {
-  display: none !important;
-  visibility: none !important;
 }
 
 .gsc-webResult-divider {

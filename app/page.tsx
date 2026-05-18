@@ -2,7 +2,7 @@
 
 import RefinementSelectors from './components/RefinementSelectors';
 import TypeLabels from './components/TypeLabels'; 
-import TotalResults from './components/TotalResults';
+import Results from './components/Results';
 import Script from 'next/script';
 
 export default function SoftwareSearch() {
@@ -26,7 +26,8 @@ export default function SoftwareSearch() {
         className="gcse-search"
         data-placeholder="Search for software..."
       ></div>
-      <TotalResults />
+
+      <Results />
     </div>
   );
 }
