@@ -16,6 +16,7 @@ export default function RefinementSelectors() {
     
       if (elements.length > 0) {
         const values = Array.from(elements).map(el => el.textContent);
+        console.log(values);
         const newValues = values.filter((val) => val !== 'Torrent' && val !== 'Direct');
         setSpanValues((prev) => {
           return JSON.stringify(prev) === JSON.stringify(values) ? prev : newValues;
