@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export default function Results({ setResults, setTotalResults, setTotalPages }) {
+export default function Results({ setResults, setTotalResults, setTotalPages, setRefinement }) {
   useEffect(() => {
     let timeoutId;
 
@@ -26,6 +26,25 @@ export default function Results({ setResults, setTotalResults, setTotalPages }) 
     const parseAndSet = () => {
       const visibleNodes = getVisibleResultNodes();
       const resultInfoElement = document.querySelector('.gsc-result-info');
+      const elements = document.querySelectorAll('.gsc-refinementHeader span');
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const currentQuery = params.get('gsc.q') || '';
+      
+      if (!currentQuery.trim()) {
+        setResults([]);
+        setTotalResults('');
+        setTotalPages('');
+        return;
+      }
+    
+      if (elements.length > 0) {
+        const values = Array.from(elements).map(el => el.textContent);
+        console.log(values);
+        const newValues = values.filter((val) => val !== 'Torrent' && val !== 'Direct');
+        setRefinement((prev) => {
+          return JSON.stringify(prev) === JSON.stringify(values) ? prev : newValues;
+        });
+      }
 
       if (resultInfoElement) {
         const textContent = resultInfoElement.textContent;

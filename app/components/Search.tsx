@@ -29,6 +29,8 @@ export default function Search() {
     setQuery('');
     const params = new URLSearchParams(window.location.hash.substring(1));
     params.delete('gsc.q');
+    params.delete('gsc.page');
+    params.delete('gsc.sort');
     window.location.hash = params.toString(); 
   };
 
