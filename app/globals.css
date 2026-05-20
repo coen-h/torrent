@@ -24,6 +24,55 @@ body {
 }
 
 .gsc-control-cse,
+.gsc-wrapper,
+.gsc-results-wrapper-nooverlay,
+.gsc-resultsbox-visible {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.gsc-search-box {
+  display: none !important;
+}
+
+.gsc-expansionArea,
+.gsc-cursor-box,
+.gsc-adBlock,
+.gsc-results-wrapper-nooverlay {
+  opacity: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  pointer-events: none !important;
+}
+
+#recaptcha-wrapper:has(iframe) {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+  background: #171717 !important; 
+  padding: 24px !important;
+  border-radius: 12px !important;
+  border: 1px solid #262626 !important; 
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75) !important;
+}
+
+#recaptcha-wrapper[style*="display: none"],
+#recaptcha-wrapper[style*="display:none"] {
+  display: none !important;
+  padding: 0 !important;
+}
+
+.gsc-control-cse,
 .gsc-control-cse *,
 .gsc-input,
 .gsc-result,
