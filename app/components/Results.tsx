@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-export default function Results({ results, totalResults, totalPages }) {
-
+export default function Results({ results, totalResults, totalPages, theme }) {
+  const textColor = theme?.textColor || 'text-emerald-300';
   const handleNavigation = (pageNum) => {
     const gsePaginationElements = document.querySelectorAll('.gsc-cursor-page');
     let clicked = false;
@@ -31,7 +31,7 @@ export default function Results({ results, totalResults, totalPages }) {
         results.map((result, index) => (
           <div key={index} className={`p-2 border flex gap-2 ${result.img ? 'pr-40' : ''} relative border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-neutral-900 shadow-sm`}>
             <div>
-              <a href={result.link} target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-emerald-100 hover:underline font-semibold text-lg line-clamp-1">{result.title}</a>
+              <a href={result.link} target="_blank" rel="noopener noreferrer" className={`${textColor} hover:text-neutral-100 hover:underline font-semibold text-lg line-clamp-1 transition`}>{result.title}</a>
               <p className="text-sm text-mist-400 line-clamp-1">{result.link}</p>
               <p className="text-neutral-600 dark:text-neutral-300 mt-2 text-sm leading-relaxed">{result.snippet}</p>
             </div>
