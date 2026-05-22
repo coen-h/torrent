@@ -1,5 +1,3 @@
-// src/config/engines.ts
-
 export interface EngineConfig {
   name: string;
   cx: string;

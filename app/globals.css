@@ -26,6 +26,7 @@ body {
 .gsc-control-cse,
 .gsc-wrapper,
 .gsc-results-wrapper-nooverlay,
+.gsc-modal-background-image,
 .gsc-resultsbox-visible {
   background: transparent !important;
   border: none !important;
@@ -40,7 +41,9 @@ body {
 .gsc-expansionArea,
 .gsc-cursor-box,
 .gsc-adBlock,
-.gsc-results-wrapper-nooverlay {
+.gsc-results-wrapper-nooverlay,
+.gsc-results-wrapper-overlay,
+.gsc-modal-background-image {
   opacity: 0 !important;
   height: 0 !important;
   min-height: 0 !important;

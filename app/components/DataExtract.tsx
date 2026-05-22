@@ -8,6 +8,7 @@ export default function Results({ setResults, setTotalResults, setTotalPages, se
 
     const handleHashChange = () => {
       setResults([]);
+      setRefinement([]);
       setTotalResults('');
       setTotalPages('');
     };
@@ -32,6 +33,7 @@ export default function Results({ setResults, setTotalResults, setTotalPages, se
       
       if (!currentQuery.trim()) {
         setResults([]);
+        setRefinement([]);
         setTotalResults('');
         setTotalPages('');
         return;
