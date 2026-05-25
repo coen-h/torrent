@@ -8,10 +8,21 @@ export default function Results({ setResults, setTotalResults, setTotalPages, se
 
     const handleHashChange = () => {
       setResults([]);
-      setRefinement([]);
       setTotalResults('');
       setTotalPages('');
+      
+      const params = new URLSearchParams(window.location.hash.substring(1));
+      const currentQuery = params.get('gsc.q') || '';
+      
+      if (!currentQuery.trim()) {
+        setRefinement([]); 
+      }
+      
+      document.querySelectorAll('.gsc-webResult.gsc-result').forEach(node => {
+        node.style.display = 'none';
+      });
     };
+
     window.addEventListener('hashchange', handleHashChange);
 
     const getVisibleResultNodes = () => {

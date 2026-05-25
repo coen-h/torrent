@@ -1,6 +1,6 @@
 "use client";
 
-export default function Results({ results, totalResults, totalPages, theme, setResults }) {
+export default function Results({ results, totalResults, totalPages, theme }) {
   const textColor = theme?.textColor || 'text-emerald-300';
 
   const handleNavigation = (pageNum) => {
@@ -9,6 +9,10 @@ export default function Results({ results, totalResults, totalPages, theme, setR
     
     gsePaginationElements.forEach((el) => {
       if (el.textContent === String(pageNum)) {
+        document.querySelectorAll('.gsc-webResult.gsc-result').forEach(node => {
+          node.style.display = 'none';
+        });
+        
         el.click();
         clicked = true;
       }
