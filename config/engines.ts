@@ -2,6 +2,7 @@ export interface EngineConfig {
   name: string;
   cx: string;
   placeholder: string;
+  refinements: string[];
   theme: {
     textColor: string;
     gradientFrom: string;
@@ -17,6 +18,7 @@ export const ENGINES_MAP: Record<string, EngineConfig> = {
     name: "Zither Software",
     cx: "e05ec25e76bc046f5",
     placeholder: "Search for software...",
+    refinements: ["Torrent", "Direct"],
     theme: {
       textColor: "text-cyan-200",
       gradientFrom: "from-neutral-200",
@@ -30,6 +32,7 @@ export const ENGINES_MAP: Record<string, EngineConfig> = {
     name: "Zither Games",
     cx: "a1c68bdb263434c9b",
     placeholder: "Search for retro & modern games...",
+    refinements: ["Torrent", "Direct"],
     theme: {
       textColor: "text-emerald-300",
       gradientFrom: "from-neutral-200",
@@ -37,6 +40,20 @@ export const ENGINES_MAP: Record<string, EngineConfig> = {
       accentBorder: "hover:border-emerald-300/25",
       accentBg: "bg-emerald-300/10",
       radialGlow: "rgba(52,211,153,0.12)",
+    }
+  },
+  apk: {
+    name: "Zither APKs",
+    cx: "52ff23f685cdf45ce",
+    placeholder: "Search for mobile games...",
+    refinements: ["Modded", "Untouched"],
+    theme: {
+      textColor: "text-slate-300",
+      gradientFrom: "from-neutral-200",
+      gradientTo: "to-slate-400",
+      accentBorder: "hover:border-slate-300/25",
+      accentBg: "bg-slate-300/10",
+      radialGlow: "rgba(200,211,240,0.12)",
     }
   }
 };

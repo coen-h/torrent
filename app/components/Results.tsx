@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-
 export default function Results({ results, totalResults, totalPages, theme }) {
   const textColor = theme?.textColor || 'text-emerald-300';
   const handleNavigation = (pageNum) => {
@@ -41,11 +39,11 @@ export default function Results({ results, totalResults, totalPages, theme }) {
               </div>
             )}
             <div className="absolute top-1 right-1 flex gap-1 z-10">
-              {result.hasTorrent && (
-                <span className="bg-emerald-500/40 backdrop-blur text-emerald-50 border border-emerald-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">Torrent</span>
+              {result.hasFirst && (
+                <span className="bg-emerald-500/40 backdrop-blur text-emerald-50 border border-emerald-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasFirst}</span>
               )}
-              {result.hasDirect && (
-                <span className="bg-blue-500/40 backdrop-blur text-blue-50 border border-blue-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">Direct</span>
+              {result.hasSecond && (
+                <span className="bg-blue-500/40 backdrop-blur text-blue-50 border border-blue-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasSecond}</span>
               )}
             </div>
           </div>

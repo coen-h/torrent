@@ -15,6 +15,7 @@ export default function SearchLayoutWrapper({ config }: { config: EngineConfig }
   const [totalResults, setTotalResults] = useState('');
   const [totalPages, setTotalPages] = useState('');
   const [refinement, setRefinement] = useState([]);
+  const refinementExtra = config.refinements || [];
   const glowColor = config.theme?.radialGlow || 'rgba(52,211,153,0.12)';
   const gradientFrom = config.theme?.gradientFrom || 'from-neutral-200';
   const gradientTo = config.theme?.gradientTo || 'from-neutral-200';
@@ -28,13 +29,12 @@ export default function SearchLayoutWrapper({ config }: { config: EngineConfig }
           <h1 className={`text-5xl font-extrabold tracking-tight bg-gradient-to-br ${gradientFrom} ${gradientTo} bg-clip-text text-transparent pb-1`}>{config.name}.</h1>
           <Ticker />
         </div>
-        {refinement.length > 0 && (
-          <RefinementSelectors refinement={refinement} theme={config.theme} />
-        )}
+
+        <RefinementSelectors refinement={refinement} theme={config.theme} refinementExtra={refinementExtra} />
 
         <Search />
 
-        <DataExtract setResults={setResults} setTotalResults={setTotalResults} setTotalPages={setTotalPages} setRefinement={setRefinement} />
+        <DataExtract setResults={setResults} setTotalResults={setTotalResults} setTotalPages={setTotalPages} setRefinement={setRefinement} refinementExtra={refinementExtra} />
 
         <Results results={results} totalResults={totalResults} totalPages={totalPages} theme={config.theme} />
       

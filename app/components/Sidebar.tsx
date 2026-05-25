@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from 'react';
-import { Gamepad, LaptopMinimal } from 'lucide-react';
+import { Gamepad, LaptopMinimal, Smartphone} from 'lucide-react';
 import Link from 'next/link';
 
 export default function SearchLayoutWrapper() {
@@ -10,6 +9,7 @@ export default function SearchLayoutWrapper() {
       <div className='bg-white/10 flex-col py-1 flex gap-2 items-center rounded'>
         <Link href="/software" className='text-neutral-400 hover:text-white transition'><LaptopMinimal width={28} height={28} /></Link>
         <Link href="/games" className='text-neutral-400 hover:text-white transition'><Gamepad width={28} height={28} /></Link>
+        <Link href="/apk" className='text-neutral-400 hover:text-white transition'><Smartphone width={28} height={28} /></Link>
       </div>
     </div>
   );

@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 
-export default function RefinementSelectors({ refinement, theme }) {
+export default function RefinementSelectors({ refinement, theme, refinementExtra }) {
   const [selected, setSelected] = useState('');
   const [dropdownValue, setDropdownValue] = useState('');
   const activeBg = theme?.accentBg || 'bg-emerald-300/10';
   const hoverBorder = theme?.accentBorder || 'hover:border-emerald-300/25';
+  const newValues = refinement.filter((val) => val !== refinementExtra[0] && val !== refinementExtra[1]);
 
   const handleSelectNavigation = (e) => {
     const val = e.target.value;
@@ -49,17 +50,18 @@ export default function RefinementSelectors({ refinement, theme }) {
   };
 
   return (
-    <div className='flex gap-2'>
+    <div className={`flex gap-2 ${refinement.length > 0 ? '' : 'hidden'}`}>
       <select value={dropdownValue} onChange={handleSelectNavigation} className={`bg-white/10 p-1 rounded border border-white/5 ${hoverBorder}`}>
-        {refinement.map((val, index) => (
+        {newValues.map((val, index) => (
           <option key={index}>{val}</option>
         ))}
       </select>
-
-      <div className='flex gap-1'>
-        <button className={`${selected === 'torrent' ? activeBg : 'bg-white/10'} p-1 rounded cursor-pointer border border-white/5 ${hoverBorder} transition-colors`} onClick={() => handleNavigation('torrent')}>Torrent</button>
-        <button className={`${selected === 'direct' ? activeBg : 'bg-white/10'} p-1 rounded cursor-pointer border border-white/5 ${hoverBorder} transition-colors`} onClick={() => handleNavigation('direct')}>Direct</button>
-      </div>
+      {refinementExtra.length > 0 && (
+        <div className='flex gap-1'>
+          <button className={`${selected === refinementExtra[0] ? activeBg : 'bg-white/10'} p-1 rounded cursor-pointer border border-white/5 ${hoverBorder} transition-colors`} onClick={() => handleNavigation(refinementExtra[0])}>{refinementExtra[0]}</button>
+          <button className={`${selected === refinementExtra[1] ? activeBg : 'bg-white/10'} p-1 rounded cursor-pointer border border-white/5 ${hoverBorder} transition-colors`} onClick={() => handleNavigation(refinementExtra[1])}>{refinementExtra[1]}</button>
+        </div>
+      )}
     </div>
   );
 }

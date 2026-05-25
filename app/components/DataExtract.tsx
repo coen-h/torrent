@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export default function Results({ setResults, setTotalResults, setTotalPages, setRefinement }) {
+export default function Results({ setResults, setTotalResults, setTotalPages, setRefinement, refinementExtra }) {
   useEffect(() => {
     let timeoutId;
 
@@ -41,10 +41,8 @@ export default function Results({ setResults, setTotalResults, setTotalPages, se
     
       if (elements.length > 0) {
         const values = Array.from(elements).map(el => el.textContent);
-        console.log(values);
-        const newValues = values.filter((val) => val !== 'Torrent' && val !== 'Direct');
         setRefinement((prev) => {
-          return JSON.stringify(prev) === JSON.stringify(values) ? prev : newValues;
+          return JSON.stringify(prev) === JSON.stringify(values) ? prev : values;
         });
       }
 
@@ -65,16 +63,16 @@ export default function Results({ setResults, setTotalResults, setTotalPages, se
           const titleElement = node.querySelector('.gs-title a');
           const snippetElement = node.querySelector('.gs-snippet');
           const imageElement = node.querySelector('.gs-image img');
-          const hasDirect = node.querySelector('.gs-label[data-refinementlabel="direct"]');
-          const hasTorrent = node.querySelector('.gs-label[data-refinementlabel="torrent"]');
+          const hasFirst = node.querySelector(`.gs-label[data-refinementlabel="${refinementExtra[0].toLowerCase()}"]`);
+          const hasSecond = node.querySelector(`.gs-label[data-refinementlabel="${refinementExtra[1].toLowerCase()}"]`);
 
           return {
             title: titleElement ? titleElement.textContent : '',
             link: titleElement ? titleElement.href : '',
             snippet: snippetElement ? snippetElement.textContent : '',
             image: imageElement ? imageElement.src : '',
-            hasDirect: !!hasDirect,
-            hasTorrent: !!hasTorrent,
+            hasFirst: hasFirst ? hasFirst.textContent : '',
+            hasSecond: hasSecond ? hasSecond.textContent : '',
           };
         }).filter((res) => res.title && res.link);
 
