@@ -1,7 +1,8 @@
 "use client";
 
-export default function Results({ results, totalResults, totalPages, theme }) {
+export default function Results({ results, totalResults, totalPages, theme, setResults }) {
   const textColor = theme?.textColor || 'text-emerald-300';
+
   const handleNavigation = (pageNum) => {
     const gsePaginationElements = document.querySelectorAll('.gsc-cursor-page');
     let clicked = false;

@@ -48,11 +48,11 @@ export const ENGINES_MAP: Record<string, EngineConfig> = {
     placeholder: "Search for mobile games...",
     refinements: ["Modded", "Untouched"],
     theme: {
-      textColor: "text-slate-300",
-      gradientFrom: "from-neutral-200",
-      gradientTo: "to-slate-400",
-      accentBorder: "hover:border-slate-300/25",
-      accentBg: "bg-slate-300/10",
+      textColor: "text-slate-400",
+      gradientFrom: "from-neutral-300",
+      gradientTo: "to-slate-500",
+      accentBorder: "hover:border-slate-400/25",
+      accentBg: "bg-slate-500/10",
       radialGlow: "rgba(200,211,240,0.12)",
     }
   }

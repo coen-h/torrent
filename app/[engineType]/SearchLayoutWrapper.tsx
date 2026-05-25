@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { EngineConfig } from '@/config/engines';
+import GsceInit from './GsceInit';
 import RefinementSelectors from '@/app/components/RefinementSelectors';
 import Sidebar from '@/app/components/Sidebar';
 import Results from '@/app/components/Results';
-import Script from 'next/script';
 import Search from '@/app/components/Search';
 import Ticker from '@/app/components/Ticker';
 import DataExtract from '@/app/components/DataExtract';
@@ -37,11 +37,8 @@ export default function SearchLayoutWrapper({ config }: { config: EngineConfig }
         <DataExtract setResults={setResults} setTotalResults={setTotalResults} setTotalPages={setTotalPages} setRefinement={setRefinement} refinementExtra={refinementExtra} />
 
         <Results results={results} totalResults={totalResults} totalPages={totalPages} theme={config.theme} />
-      
-        <Script
-          src={`https://cse.google.com/cse.js?cx=${config.cx}`}
-          strategy="afterInteractive"
-        />
+
+        <GsceInit config={config} />
 
         <div
           className="gcse-search"

@@ -51,7 +51,7 @@ export default function RefinementSelectors({ refinement, theme, refinementExtra
 
   return (
     <div className={`flex gap-2 ${refinement.length > 0 ? '' : 'hidden'}`}>
-      <select value={dropdownValue} onChange={handleSelectNavigation} className={`bg-white/10 p-1 rounded border border-white/5 ${hoverBorder}`}>
+      <select value={dropdownValue} onChange={handleSelectNavigation} className={`bg-white/10 p-1 rounded border border-white/5 ${hoverBorder} transition`}>
         {newValues.map((val, index) => (
           <option key={index}>{val}</option>
         ))}
