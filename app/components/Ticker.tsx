@@ -17,7 +17,7 @@ export default function Ticker() {
   }, []);
 
   return (
-    <div className="flex items-center gap-1 justify-center text-neutral-400 font-medium">
+    <div className="flex items-center gap-1 justify-center text-neutral-400 font-medium max-[400px]:text-[4vw]">
       <motion.span layout>The intelligent</motion.span>
         <span className="relative flex items-center justify-center overflow-hidden h-[1.5em]">
           <AnimatePresence mode="popLayout">

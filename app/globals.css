@@ -32,6 +32,7 @@ body {
   border: none !important;
   padding: 0 !important;
   margin: 0 !important;
+  overflow: hidden !important;
 }
 
 .gsc-search-box {
@@ -63,16 +64,18 @@ body {
   z-index: 99999 !important;
   pointer-events: auto !important;
   background: #171717 !important; 
-  padding: 24px !important;
+  padding: 12px !important;
   border-radius: 12px !important;
   border: 1px solid #262626 !important; 
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75) !important;
+  margin-top: 0 !important;
 }
 
 #recaptcha-wrapper[style*="display: none"],
 #recaptcha-wrapper[style*="display:none"] {
   display: none !important;
   padding: 0 !important;
+  margin-top: 0 !important;
 }
 
 .gsc-control-cse,

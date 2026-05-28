@@ -1,4 +1,4 @@
-import { ENGINES_MAP, DEFAULT_ENGINE } from '@/config/engines';
+import { ENGINES_MAP } from '@/config/engines';
 import SearchLayoutWrapper from './SearchLayoutWrapper';
 import { notFound } from 'next/navigation';
 

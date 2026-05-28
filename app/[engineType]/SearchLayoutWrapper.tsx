@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { EngineConfig } from '@/config/engines';
 import GsceInit from './GsceInit';
 import RefinementSelectors from '@/app/components/RefinementSelectors';
@@ -20,13 +20,22 @@ export default function SearchLayoutWrapper({ config }: { config: EngineConfig }
   const gradientFrom = config.theme?.gradientFrom || 'from-neutral-200';
   const gradientTo = config.theme?.gradientTo || 'from-neutral-200';
 
+  useEffect(() => {
+    console.log(refinement)
+    console.log(totalPages)
+    console.log(totalResults)
+    console.log(results)
+    console.log(refinementExtra)
+  }, [refinement, totalPages, totalResults, results])
+
+
   return (
     <div style={{ '--glow-color': glowColor } as React.CSSProperties} className={`h-screen w-full overflow-y-auto bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,var(--glow-color),transparent),radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:100%_100%,16px_16px] p-4 flex flex-col items-center gap-2`}>
       <Sidebar />
-      <div className="mx-auto p-4 flex flex-col items-center gap-2">
+      <div className="mx-auto w-full pt-4 max-[400px]:pt-0 flex flex-col items-center gap-2">
 
         <div className="text-center pb-1">
-          <h1 className={`text-5xl font-extrabold tracking-tight bg-gradient-to-br ${gradientFrom} ${gradientTo} bg-clip-text text-transparent pb-1`}>{config.name}.</h1>
+          <h1 className={`text-5xl max-[450px]:text-[10.5vw] font-extrabold tracking-tight bg-gradient-to-br ${gradientFrom} ${gradientTo} bg-clip-text text-transparent pb-1`}>{config.name}.</h1>
           <Ticker />
         </div>
 

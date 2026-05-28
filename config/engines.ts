@@ -48,7 +48,7 @@ export const ENGINES_MAP: Record<string, EngineConfig> = {
     placeholder: "Search for mobile games...",
     refinements: ["Modded", "Untouched"],
     theme: {
-      textColor: "text-slate-400",
+      textColor: "text-slate-300",
       gradientFrom: "from-neutral-300",
       gradientTo: "to-slate-500",
       accentBorder: "hover:border-slate-400/25",

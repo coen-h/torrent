@@ -32,23 +32,23 @@ export default function Results({ results, totalResults, totalPages, theme }) {
     <div className="flex flex-col gap-2 w-full max-w-3xl">
       {results.length > 0 ? (
         results.map((result, index) => (
-          <div key={index} className={`p-2 border flex gap-2 ${result.image ? 'pr-40' : ''} relative border-neutral-800 rounded-md bg-neutral-700/10 backdrop-blur shadow-sm`}>
+          <div key={index} className={`p-2 border flex gap-2 ${result.image ? 'sm:pr-40' : ''} relative border-neutral-800 rounded-md bg-neutral-700/10 backdrop-blur shadow-sm`}>
             <div>
               <a href={result.link} target="_blank" rel="noopener noreferrer" className={`${textColor} hover:text-neutral-100 hover:underline font-semibold text-lg line-clamp-1 transition`}>{result.title}</a>
               <p className="text-sm text-mist-400 line-clamp-1">{result.link}</p>
-              <p className="text-neutral-600 dark:text-neutral-300 mt-2 text-sm leading-relaxed">{result.snippet}</p>
+              <p className="text-neutral-600 dark:text-neutral-300 mt-2 text-sm line-clamp-2">{result.snippet}</p>
             </div>
             {result.image && (
-              <div className="absolute right-0 top-0 bottom-0 w-40 p-2">
+              <div className="absolute right-0 top-0 bottom-0 w-40 p-2 max-sm:hidden">
                 <img src={result.image} alt={result.title} className="w-full h-full object-cover rounded-md" />
               </div>
             )}
             <div className="absolute top-1 right-1 flex gap-1 z-10">
               {result.hasFirst && (
-                <span className="bg-emerald-500/40 backdrop-blur text-emerald-50 border border-emerald-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasFirst}</span>
+                <span className="bg-emerald-700 text-emerald-50 border border-emerald-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasFirst}</span>
               )}
               {result.hasSecond && (
-                <span className="bg-blue-500/40 backdrop-blur text-blue-50 border border-blue-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasSecond}</span>
+                <span className="bg-sky-700 text-blue-50 border border-blue-500/30 text-xs font-semibold px-2 py-0.5 rounded-md">{result.hasSecond}</span>
               )}
             </div>
           </div>

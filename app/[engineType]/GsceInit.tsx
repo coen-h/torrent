@@ -2,7 +2,15 @@
 
 import { useEffect } from 'react';
 
-export default function GsceInit({ config }) {
+declare global {
+  interface Window {
+    google?: {
+      search?: Record<string, unknown>;
+    };
+  }
+}
+
+export default function GsceInit({ config }: { config: { cx: string } }) {
   useEffect(() => {
     const scriptId = 'gcse-dynamic-script';
 
@@ -11,8 +19,8 @@ export default function GsceInit({ config }) {
       existingScript.remove();
     }
 
-    if ((window as any).google && (window as any).google.search) {
-      delete (window as any).google.search;
+    if (window.google && window.google.search) {
+      delete window.google.search;
     }
 
     const script = document.createElement('script');

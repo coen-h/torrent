@@ -50,10 +50,10 @@ export default function RefinementSelectors({ refinement, theme, refinementExtra
   };
 
   return (
-    <div className={`flex gap-2 ${refinement.length > 0 ? '' : 'hidden'}`}>
-      <select value={dropdownValue} onChange={handleSelectNavigation} className={`bg-white/10 p-1 rounded border border-white/5 ${hoverBorder} transition`}>
+    <div className={`flex gap-2 w-full justify-center ${refinement.length > 0 ? '' : 'hidden'}`}>
+      <select value={dropdownValue} onChange={handleSelectNavigation} className={`max-[400px]:w-full bg-white/10 p-1 rounded border text-white border-white/5 ${hoverBorder} transition`}>
         {newValues.map((val, index) => (
-          <option key={index}>{val}</option>
+          <option className='text-black bg-white' key={index}>{val}</option>
         ))}
       </select>
       {refinementExtra.length > 0 && (
